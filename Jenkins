@@ -1,0 +1,6 @@
+
+How to hide command in Console Output?   
+
+in Build Step - Execute Shell :
+add set+x in the first line
+(add set-x before command to apear)
