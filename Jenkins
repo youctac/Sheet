@@ -4,3 +4,29 @@ How to hide command in Console Output?
 in Build Step - Execute Shell :
 add set+x in the first line
 (add set-x before command to apear)
+
+###
+
+How to load file from jenkins to remote host?
+
+Steps:
+- This project is parameterized
+- File location # This is default filename to load and also this is var name. Example: myDefaultFileName
+- Build - Execute Shell:
+    - mv myFictionalFileName ${myFictionalFileName}. # This is optional - if we want to use original file name
+    - scp /jenkins-workspace/tfi-gate-test/${myFictionalFileName} <user_able_to_connect_to_remote_host>@<remote_host>:/tmp/     #This is command for optional step - if we saved original file name
+    - scp /jenkins-workspace/tfi-gate-test/myDefaultFileName <user_able_to_connect_to_remote_host>@<remote_host>:/tmp/ 
+    #This is command for that case when we use default file name (called as File location)
+
+###
+
+How to use incoming var as string in mysql-query?
+
+Let's say we want to input some numeric value. Lets call it StringParameter - inputVarChar. And then substitute that value in mysql-query. And we know that that value in DB stored as varchar. We need to use qoutes in mysql-query. Example: select * from someTable where varcharname='123456789987654321'
+\"$inputVarChar\"
+
+Steps:
+- This project is parameterized
+- String Parameter, Name = inputVarChar
+- Build - Execute Shell:
+    ssh ansible@prod-gate-ue-service1.prod.gate.orglot.office "mysql ... -e'select * from someTable where varcharname=\"$inputVarChar\"'"
