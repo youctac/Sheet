@@ -30,3 +30,9 @@ Steps:
 - String Parameter, Name = inputVarChar
 - Build - Execute Shell:
     ssh ansible@prod-gate-ue-service1.prod.gate.orglot.office "mysql ... -e'select * from someTable where varcharname=\"$inputVarChar\"'"
+
+###
+
+How to look credentials?
+
+     sh 'cat $JENKINS_HOME/credentials.xml ' 
