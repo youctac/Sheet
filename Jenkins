@@ -36,3 +36,17 @@ Steps:
 How to look credentials?
 
      sh 'cat $JENKINS_HOME/credentials.xml ' 
+
+###
+
+        stage('Input') {
+            steps {
+                script {
+                    ENVT = JOB_NAME.substring(0, JOB_NAME.indexOf('-')) # prod-something-k8s
+                    echo "${ENVT}"
+                     if  ( "${ENVT}" == 'prod' ) { 
+                         input("Вы хотите продолжить?")
+                    }
+                }
+            }
+        }
